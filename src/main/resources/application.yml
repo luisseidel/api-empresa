@@ -1,0 +1,18 @@
+quarkus:
+  profile: dev
+
+"%dev":
+  quarkus:
+    http:
+      port: 8081
+    datasource:
+      db-kind: postgresql
+      username: celk
+      password: celk
+      jdbc:
+        url: jdbc:postgresql://localhost:5432/teste_quarkus
+      hibernate-orm:
+        database:
+          generation: none
+      smallrye-openapi:
+        path: /swagger
