@@ -1,18 +1,39 @@
 quarkus:
-  profile: dev
+    profile: dev
 
 "%dev":
-  quarkus:
-    http:
-      port: 8081
-    datasource:
-      db-kind: postgresql
-      username: celk
-      password: celk
-      jdbc:
-        url: jdbc:postgresql://localhost:5432/teste_quarkus
-      hibernate-orm:
-        database:
-          generation: none
-      smallrye-openapi:
-        path: /swagger
+    quarkus:
+        http:
+            port: 8081
+        oidc:
+            client-id: backend-service
+            credentials:
+                secret: secret
+            tls:
+                verification: none
+        datasource:
+            db-kind: postgresql
+            username: celk
+            password: celk
+            jdbc:
+                url: jdbc:postgresql://localhost:5432/teste_quarkus
+        hibernate-orm:
+            database:
+                generation: none
+        smallrye-openapi:
+            path: /swagger
+
+#keycloak:
+#    realm: quarkus
+#    resource: client
+#    auth-server-url: http://localhost:8543/auth/
+#    credentials:
+#        secret: '840c8b4a-6553-4c6c-968c-11543ff290c4'
+#    bearer-only: true
+#    use-resource-role-mappings: true
+#    ssl-required: external
+
+"%prod":
+    quarkus:
+        oidc:
+            auth-server-url: https://localhost:8543/realms/quarkus
