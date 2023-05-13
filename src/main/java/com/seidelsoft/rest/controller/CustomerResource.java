@@ -2,21 +2,22 @@ package com.seidelsoft.rest.controller;
 
 import com.seidelsoft.rest.model.Customer;
 import com.seidelsoft.rest.service.CustomerService;
+import com.seidelsoft.rest.util.MediaTypes;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Path("/customers")
+@Produces(MediaTypes.APPLICATION_JSON)
+@Consumes(MediaTypes.APPLICATION_JSON)
 public class CustomerResource {
 
     @Inject
-    private CustomerService service;
-
+    CustomerService service;
 
     @GET
     public List<Customer> retrieveCustomers() {

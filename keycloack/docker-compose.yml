@@ -1,0 +1,36 @@
+services:
+    keycloak_api:
+        container_name: keycloak_api
+        image: jboss/keycloak:latest
+        restart: always
+        depends_on:
+            - postgres_db
+        ports:
+            - "8543:8443"
+        command:
+            - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/quarkus-realm.json"
+        volumes:
+            - ./imports:/opt/jboss/keycloak/imports
+        environment:
+            DB_VENDOR: POSTGRES
+            DB_ADDR: postgres
+            DB_DATABASE: keycloak
+            DB_USER: keycloak
+            DB_SCHEMA: public
+            DB_PASSWORD: password
+            KEYCLOAK_USER: admin
+            KEYCLOAK_PASSWORD: admin
+
+    postgres_db:
+        container_name: postgres
+        image: postgres
+        restart: always
+        volumes:
+            - postgres_db_data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_DB: keycloak
+            POSTGRES_USER: keycloak
+            POSTGRES_PASSWORD: password
+
+volumes:
+    postgres_db_data:
