@@ -6,9 +6,10 @@ quarkus:
         http:
             port: 8081
         oidc:
+            auth-server-url: https://localhost:8543/auth/realms/quarkus
             client-id: backend-service
             credentials:
-                secret: secret
+                secret: phHhahUQ5uASTOYoH9ehUoTmHT6jXFyq
             tls:
                 verification: none
         datasource:

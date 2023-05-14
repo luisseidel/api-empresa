@@ -3,6 +3,7 @@ package com.seidelsoft.rest.controller;
 import com.seidelsoft.rest.model.Customer;
 import com.seidelsoft.rest.service.CustomerService;
 import com.seidelsoft.rest.util.MediaTypes;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -20,6 +21,7 @@ public class CustomerResource {
     CustomerService service;
 
     @GET
+    @RolesAllowed("manager")
     public List<Customer> retrieveCustomers() {
         List<Customer> list = new ArrayList<>();
 
@@ -34,6 +36,7 @@ public class CustomerResource {
 
     @POST
     @Transactional
+    @RolesAllowed("manager")
     public void addCustomer(Customer c) {
         service.addCustomer(c);
     }
